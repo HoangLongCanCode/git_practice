@@ -244,7 +244,7 @@ It's good practice to do all your development work in a specific development bra
 5. Stage your changes.
 6. Commit your changes.
 
-## Exercise 10: Amending commits
+## Exercise 10: Amending commits and a bonus Vim lesson
 
 Sometimes, you will want to edit the contents of a commit. This is super easy when you haven't pushed your local commits up to the remote yet. Let's add a picture of the location to the repository.
 
@@ -256,21 +256,149 @@ Sometimes, you will want to edit the contents of a commit. This is super easy wh
     git commit --amend
     ```
 
+    When you amend a commit, you will have an opportunity to amend your commit message. However, Git defaults to using the Vim editor for this action. Vim is a terminal-based, keyboard-only text editor that has some strange commands. However, if you learn Vim, these once-unintuitive commands become like second nature. See the subheading below for some Vim tips.
+4. Push your local changes up to the remote.
 
-## Exercise 11: Reverting commits
+### Your bonus Vim lesson
+
+You can navigate around the editor with your arrow keys, but the preferred Vim way is to use `h` for left, `j` for down, `k` for up, and `l` for right. Once you reach the spot you want to edit, press `i` to bring you to "insert mode". You can type as normal now. Once you are done editing, press `esc` to enter "normal mode." To save and exit, type in `:wq` (**w**rite, **q**uit).
+
+If you want to learn more Vim, `vimtutor` is a great tool!
+
+```bash
+vimtutor
+```
+
+## Exercise 11: Reverting commits & git log
+
+What happens if you accidentally commit and push something you didn't mean to publish?
+
+1. We'll stay in the development branch you've been working in. Edit your `README.md` to add some lines about your least favorite place on campus.
+2. Stage your changes.
+3. Commit your changes.
+4. Push your changes to the remote.
+5. Let's revert this commit. First, we need the commit ID of the most recent commit.
+
+    ```bash
+    git log
+    ```
+
+6. Copy the commit hash of the commit where you made comments about your least favorite place. The commit hash is a long string of lots of letters and numbers.
+7. Revert the commit.
+
+    ```bash
+    git revert <commit-hash>
+    ```
+
+    This will open another Vim-like editor to confirm a commit message. What Git is doing is creating a new commit that performs the opposite of your original changes.
+8. Push this commit to the remote.
 
 ## Exercise 12: Removing files
 
-## Exercise 13: Merging someone else's changes
+You now want your repository to be text-only. Let's remove the picture.
 
-## Exercise 14: Opening an issue
+1. Remove the picture.
 
-## Exercise 15: Closing an issue via PR
+    ```bash
+    git rm path/to/image
+    ```
 
-## Exercise 16: .gitignore
+2. Commit the change.
+3. Push the commit to your remote.
 
-## Exercise 17: Other useful files to keep in a repository
+## Exercise 13: Merging your own changes
 
-## Exercise 18: git log
+Time to merge this development branch into `main`.
 
-## Exercise 19: git diff
+1. Go to your remote's GitHub page and create a PR that merges your development branch into `main`.
+2. Merge the pull request.
+
+## Exercise 14: Making changes in someone else's repo (again)
+
+This exercise will tee us up for the next one. You will suggest a change in one of your colleague's favorite place repository.
+
+1. Find one of your colleague's repositories and fork it.
+2. Clone your fork (remember to use the SSH URL).
+3. Add your colleague's repository as the `upstream` remote.
+4. Create and check out a local development branch.
+5. Add a file saying something nice about the place that your colleague chose.
+6. Stage your changes.
+7. Commit your changes.
+8. Push your commits to the `origin` remote.
+9. Open a PR in the upstream remote.
+
+## Exercise 15: Merging someone else's changes
+
+When someone makes a PR in your repo, you will have a chance to review it, suggest changes, make comments, ask questions, and ultimately decide to accept it or reject it. In this exercise, we will merge your colleague's comments about your favorite place.
+
+1. Navigate to the PR that your colleague has opened in your repo.
+2. Review the "files changed" tab.
+3. Make a comment in the PR.
+4. Merge the PR.
+
+## Exercise 16: Opening an issue
+
+Issues are a neat way to make maintainers aware of bugs or feature requests. You can make an issue in basically any repository that is visible to you. In this exercise, we will make an issue in our own favorite things repo.
+
+1. In your repo's GitHub page, go to the "Issues" tab and click "New issue."
+2. Write an issue about wanting an image of the favorite place.
+3. Publish the issue. Note the number that it is assigned. These numbers are how GitHub tracks issues and PRs.
+
+## Exercise 17: Closing an issue via PR
+
+Issues are nice because they can be tied to PRs, which is a good way to track your development work. We will re-add the photo that you `rm`'ed earlier.
+
+1. Update your local copies of `upstream` and `origin`, as well as your `origin remote`.
+2. Create and check out a development branch.
+3. Add the image of your favorite place to the repository.
+4. Stage your change.
+5. Commit your change.
+6. Push your change to your remote.
+7. Open a PR to merge the development branch into `main`. In the text description of the PR, you can write something like "Closes #[the number of the issue]".
+8. Merge the PR. Notice that with the keyword "closes," the issue is automatically closed.
+
+Other such keywords are "close, closed, fix, fixes, fixed, resolve, resolves, resolved."
+
+## Exercise 18: .gitignore
+
+Sometimes, in software development, running code produces files that you don't want to publish. It is annoying to manually tell Git not to push those files to a remote. This is where a file called a `.gitignore` comes in handy.
+
+1. Update your local copies of `upstream` and `origin`, as well as your `origin remote`.
+2. Create and check out a development branch.
+3. Add a stock photo of your college to the repository.
+4. Add a file named `.gitignore` to the repository.
+5. Put the filepath to the stock photo in the `.gitignore`.
+6. Stage your changes.
+7. Look at what was staged using `git status`. Notice that the stock photo did not get staged for commit!
+8. Commit your changes.
+
+## Exercise 19: Other useful files to keep in a repository
+
+Another useful file is a license. Licenses tell others what they are and aren't allowed to do with your code. [Choosealicense.com](https://choosealicense.com/) is a site that contains the text of several common open-source licenses. For this exercise, we will add an MIT License, which is the most permissive license.
+
+1. Add a file named `LICENSE` to your repository.
+2. Copy the text of the MIT License from choosealicense into the `LICENSE` file.
+3. Stage your changes.
+4. Commit your changes.
+
+## Exercise 20: git diff
+
+What do you do if you've made changes to a file, had to leave in the middle, came back, and forgot what you have done since your stage?
+
+1. Add some text to your `README.md` that indicates that this repository was for a workshop in your REU.
+2. See the differences between your working directory and what has already been staged.
+
+    ```bash
+    git diff
+    ```
+
+    You should see that the lines about the REU are highlighted in the diff.
+3. Stage your changes.
+4. Commit your changes.
+5. Push your changes to your remote.
+6. Open a PR in your remote to merge your development branch into `main`.
+7. Merge your PR.
+
+## The end??
+
+If you made it this far during the workshop, congrats! Now go help a colleague or do some `vimtutor`.
