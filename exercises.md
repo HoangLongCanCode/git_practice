@@ -204,9 +204,58 @@ Sometimes, a maintainer of a repo will review your PR and ask you for changes. I
 
 ## Exercise 8: Making your own repository
 
+It's time for you to make your own repository. This repository will highlight your favorite place on your college's campus.
+
+1. On the GitHub home page, click on the new repository button. It is a green button in the top left with a book icon.
+
+    ![image](images/new_repo.png)
+
+2. Fill out the repository information. The owner is you, the repository name can be something like `my-favorite-place`, give it a short description, set visibility to public. Don't use a template, and don't add any of the files listed (README, .gitignore, license) for this exercise.
+
+    ![image](images/repo-info.png)
+3. Click "Create repository".
+4. Go to the location in your working directory where you want your local `my-favorite-place` repository to be located. Create a directory there.
+
+   ```bash
+   cd /path/to/dir
+   mkdir my-favorite-place
+   ```
+
+5. On the GitHub website, there should be some instructions on how to create a new repository on the command line. Follow those instructions. You have created your repository!
+
 ## Exercise 9: Stashing changes
 
+It's good practice to do all your development work in a specific development branch. What do you do if you realize you've been doing work in the `main` branch?
+
+1. Edit the `README.md` in your favorite place repository. Add some facts about the place and why you like it.
+2. You've just realized you've been editing in `main`! We can store those changes while you switch to another branch.
+
+    ```bash
+    git stash
+    ```
+
+3. Your changes have been tucked away for now. Create a development branch and check it out.
+4. Pull your previous changes back from the stash.
+
+    ```bash
+    git stash pop
+    ```
+
+5. Stage your changes.
+6. Commit your changes.
+
 ## Exercise 10: Amending commits
+
+Sometimes, you will want to edit the contents of a commit. This is super easy when you haven't pushed your local commits up to the remote yet. Let's add a picture of the location to the repository.
+
+1. Download a photo of the location and put it in your repository.
+2. Stage your changes.
+3. Edit your commit.
+
+    ```bash
+    git commit --amend
+    ```
+
 
 ## Exercise 11: Reverting commits
 
@@ -221,3 +270,7 @@ Sometimes, a maintainer of a repo will review your PR and ask you for changes. I
 ## Exercise 16: .gitignore
 
 ## Exercise 17: Other useful files to keep in a repository
+
+## Exercise 18: git log
+
+## Exercise 19: git diff
