@@ -293,7 +293,40 @@ What happens if you accidentally commit and push something you didn't mean to pu
     This will open another Vim-like editor to confirm a commit message. What Git is doing is creating a new commit that performs the opposite of your original changes.
 8. Push this commit to the remote.
 
-## Exercise 12: Removing files
+## Exercise 12: Resetting commits
+
+Okay, you accidentally committed a mistake but *didn't* push. How do you quickly fix this? We'll look at a couple options that `git reset` gives you.
+
+1. Stay in the development branch you've been working in. Edit your `README.md` again to add some lines about your least favorite place on campus.
+2. Stage your changes.
+3. Commit your changes.
+4. Reset your commit but keep your changes staged.
+
+    ```bash
+    git reset --soft HEAD~1
+    ```
+
+    `--soft` keeps your commit in the staging environment. `HEAD~1` means to move the "head" of the branch back by 1 commit. Notice that if you use `git status`, your `README.md` is still staged.
+
+5. Commit your change again.
+6. Reset your commit and unstage it.
+
+    ```bash
+    git reset HEAD~1
+    ```
+
+    Notice that your changes are still in your working directory, but `git status` shows that they are unstaged.
+
+7. Commit your change again.
+8. Reset your commit and delete all code changes.
+
+    ```bash
+    git reset --hard HEAD~1
+    ```
+
+    Notice that your changes are gone entirely.
+
+## Exercise 13: Removing files
 
 You now want your repository to be text-only. Let's remove the picture.
 
@@ -306,14 +339,14 @@ You now want your repository to be text-only. Let's remove the picture.
 2. Commit the change.
 3. Push the commit to your remote.
 
-## Exercise 13: Merging your own changes
+## Exercise 14: Merging your own changes
 
 Time to merge this development branch into `main`.
 
 1. Go to your remote's GitHub page and create a PR that merges your development branch into `main`.
 2. Merge the pull request.
 
-## Exercise 14: Making changes in someone else's repo (again)
+## Exercise 15: Making changes in someone else's repo (again)
 
 This exercise will tee us up for the next one. You will suggest a change in one of your colleague's favorite place repository.
 
@@ -327,7 +360,7 @@ This exercise will tee us up for the next one. You will suggest a change in one 
 8. Push your commits to the `origin` remote.
 9. Open a PR in the upstream remote.
 
-## Exercise 15: Merging someone else's changes
+## Exercise 16: Merging someone else's changes
 
 When someone makes a PR in your repo, you will have a chance to review it, suggest changes, make comments, ask questions, and ultimately decide to accept it or reject it. In this exercise, we will merge your colleague's comments about your favorite place.
 
@@ -336,7 +369,7 @@ When someone makes a PR in your repo, you will have a chance to review it, sugge
 3. Make a comment in the PR.
 4. Merge the PR.
 
-## Exercise 16: Opening an issue
+## Exercise 17: Opening an issue
 
 Issues are a neat way to make maintainers aware of bugs or feature requests. You can make an issue in basically any repository that is visible to you. In this exercise, we will make an issue in our own favorite things repo.
 
@@ -344,7 +377,7 @@ Issues are a neat way to make maintainers aware of bugs or feature requests. You
 2. Write an issue about wanting an image of the favorite place.
 3. Publish the issue. Note the number that it is assigned. These numbers are how GitHub tracks issues and PRs.
 
-## Exercise 17: Closing an issue via PR
+## Exercise 18: Closing an issue via PR
 
 Issues are nice because they can be tied to PRs, which is a good way to track your development work. We will re-add the photo that you `rm`'ed earlier.
 
@@ -359,7 +392,7 @@ Issues are nice because they can be tied to PRs, which is a good way to track yo
 
 Other such keywords are "close, closed, fix, fixes, fixed, resolve, resolves, resolved."
 
-## Exercise 18: .gitignore
+## Exercise 19: .gitignore
 
 Sometimes, in software development, running code produces files that you don't want to publish. It is annoying to manually tell Git not to push those files to a remote. This is where a file called a `.gitignore` comes in handy.
 
@@ -372,7 +405,7 @@ Sometimes, in software development, running code produces files that you don't w
 7. Look at what was staged using `git status`. Notice that the stock photo did not get staged for commit!
 8. Commit your changes.
 
-## Exercise 19: Other useful files to keep in a repository
+## Exercise 20: Other useful files to keep in a repository
 
 Another useful file is a license. Licenses tell others what they are and aren't allowed to do with your code. [Choosealicense.com](https://choosealicense.com/) is a site that contains the text of several common open-source licenses. For this exercise, we will add an MIT License, which is the most permissive license.
 
@@ -381,7 +414,7 @@ Another useful file is a license. Licenses tell others what they are and aren't 
 3. Stage your changes.
 4. Commit your changes.
 
-## Exercise 20: git diff
+## Exercise 21: git diff
 
 What do you do if you've made changes to a file, had to leave in the middle, came back, and forgot what you have done since your stage?
 
